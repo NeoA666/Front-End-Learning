@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div>p:not(.good){
+            color: red;
+        }
+        div>p:not([title^=我是]){
+            font-size: 100px;
+        }
+        div>p:not(:first-child){
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>111111</p>
+        <p class="good">222222</p>
+        <p class="good">333333</p>
+        <p title="我是活泼的窝瓜">444444</p>
+        <p title="我是暴龙兽">555555</p>
+        <p>666666</p>
+    </div>
+</body>
+</html>
