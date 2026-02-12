@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百盛 - 精密辅料·工业心脏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: radial-gradient(circle at center, #0e0e10 0%, #030405 100%);
+            background-attachment: fixed;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent 0, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 11px),
+                radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #f97316 50%, transparent 100%);
+            animation: flowLight 3s linear infinite;
+        }
+
+        @keyframes flowLight {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            color: #f0f0f0;
+            text-transform: uppercase;
+        }
+
+        .logo svg {
+            width: 2rem;
+            height: 2rem;
+            fill: #f97316;
+            animation: spin 4s linear infinite;
+            filter: drop-shadow(0 0 8px #f97316);
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+            letter-spacing: 0.05em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f97316;
+            transition: width 0.3s, left 0.3s;
+        }
+
+        nav a:hover {
+            color: #f97316;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5% 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .hero-text h1 span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .hero-text h1 span:nth-child(1) { animation-delay: 0.1s; }
+        .hero-text h1 span:nth-child(2) { animation-delay: 0.2s; }
+        .hero-text h1 span:nth-child(3) { animation-delay: 0.3s; }
+        .hero-text h1 span:nth-child(4) { animation-delay: 0.4s; }
+        .hero-text h1 span:nth-child(5) { animation-delay: 0.5s; }
+        .hero-text h1 span:nth-child(6) { animation-delay: 0.6s; }
+        .hero-text h1 span:nth-child(7) { animation-delay: 0.7s; }
+        .hero-text h1 span:nth-child(8) { animation-delay: 0.8s; }
+        .hero-text h1 span:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text h2 {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: #38bdf8;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #38bdf8;
+            width: 0;
+            animation: typing 4s steps(30) 1s forwards, blink 0.5s step-end infinite;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: #f97316;
+            color: white;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #fb923c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #38bdf8;
+            border: 2px solid #38bdf8;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            border-color: #7dd3fc;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .icon-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .icon-group svg {
+            width: 5rem;
+            height: 5rem;
+            fill: #f97316;
+            filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.5));
+            transition: transform 0.3s;
+        }
+
+        .icon-group::before {
+            content: '⚙';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15rem;
+            color: rgba(56, 189, 248, 0.1);
+            animation: spin 20s linear infinite;
+            z-index: -1;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: #f97316;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 2rem;
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, #f97316, transparent);
+            animation: waveFlow 2s ease-in-out infinite;
+        }
+
+        @keyframes waveFlow {
+            0%, 100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(20px);
+                opacity: 0.5;
+            }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .product-card.visible {
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .product-card:nth-child(1).visible { animation-delay: 0.1s; }
+        .product-card:nth-child(2).visible { animation-delay: 0.3s; }
+        .product-card:nth-child(3).visible { animation-delay: 0.5s; }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 4px;
+            background: #f97316;
+            transition: width 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #f97316;
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .product-card:hover::before {
+            width: 100%;
+        }
+
+        .product-icon {
+            width: 3rem;
+            height: 3rem;
+            fill: #f97316;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .product-card h3 {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .product-card p {
+            color: #a0a0a0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #f97316;
+            font-weight: 700;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            background: transparent;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-small:hover {
+            background: #38bdf8;
+            color: #000;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            padding: 5rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .dashboard-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .gauge {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gauge::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #f97316 0deg 270deg,
+                rgba(249, 115, 22, 0.2) 270deg 360deg
+            );
+            animation: rotate 3s ease-in-out;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .gauge::after {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #0e0e10, #030405);
+        }
+
+        .gauge-value {
+            position: relative;
+            z-index: 1;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 2.5rem;
+            color: #f97316;
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+        }
+
+        .dashboard-label {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            border-top: 2px solid #f97316;
+            padding: 2rem 5%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .footer-icons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .footer-icons svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #666;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-icons svg:hover {
+            fill: #f97316;
+            transform: rotate(180deg);
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h2 {
+                white-space: normal;
+                width: auto;
+                border-right: none;
+                animation: fadeIn 1s 1s forwards;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .icon-group {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .icon-group svg {
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                padding-left: 1.5rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0e0e10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fb923c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 512 512">
+                <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/>
+            </svg>
+            <span>百盛</span>
+        </div>
+        <ul>
+            <li><a href="#products">产品</a></li>
+            <li><a href="#custom">定制</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    <span>精</span><span>密</span><span>辅</span><span>料</span><span> </span><span>·</span><span> </span><span>工</span><span>业</span><span>心</span><span>脏</span>
+                </h1>
+                <h2>拉链 · 纽扣 · 油边 —— 百盛一站式供应</h2>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">查看产品</a>
+                    <a href="#" class="btn btn-secondary">3D样品间</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="icon-group">
+                    <svg viewBox="0 0 192 512">
+                        <path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V448c0 17.7 14.3 32 32 32s32-14.3 32-32V64zm128 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V448c0 17.7 14.3 32 32 32s32-14.3 32-32V64z"/>
+                    </svg>
+                    <svg viewBox="0 0 512 512">
+                        <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
+                    </svg>
+                    <svg viewBox="0 0 640 512">
+                        <path d="M320 128c17.7 0 32-14.3 32-32s-14.3-32-32-32H192c-17.7 0-32 14.3-32 32V352c-35.3 0-64 28.7-64 64s28.7 64 64 64H352c88.4 0 160-71.6 160-160c0-60.9-34.1-113.9-84.1-141.1C417.9 76.3 375.2 48 320 48V128zM160 416c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 64c53 0 96 43 96 96s-43 96-96 96H160c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 64c17.7 0 32-14.3 32-32s-14.3-32-32-32H224 160z"/>
+                    </svg>
+                    <svg viewBox="0 0 512 512">
+                        <path d="M78.6 5C69.1-2.4 55.6-1.5 47 7L7 47c-8.5 8.5-9.4 22-2.1 31.6l80 104c4.5 5.9 11.6 9.4 19 9.4h54.1l109 109c-14.7 29-10 65.4 14.3 89.6l112 112c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-112-112c-24.2-24.2-60.6-29-89.6-14.3l-109-109V104c0-7.5-3.5-14.5-9.4-19L78.6 5zM19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L233.7 374.3c-7.8-20.9-9-43.6-3.6-65.1l-61.7-61.7L19.9 396.1zM512 144c0-10.5-1.1-20.7-3.2-30.5c-2.4-11.2-16.1-14.1-24.2-6l-63.9 63.9c-3 3-7.1 4.7-11.3 4.7H352c-8.8 0-16-7.2-16-16V102.6c0-4.2 1.7-8.3 4.7-11.3l63.9-63.9c8.1-8.1 5.2-21.8-6-24.2C388.7 1.1 378.5 0 368 0C288.5 0 224 64.5 224 144l0 .8 85.3 85.3c36-9.1 75.8 .5 104 28.7L429 274.5c49-23 83-72.8 83-130.5zM56 432a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title">核心辅料</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <svg class="product-icon" viewBox="0 0 192 512">
+                    <path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V448c0 17.7 14.3 32 32 32s32-14.3 32-32V64zm128 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V448c0 17.7 14.3 32 32 32s32-14.3 32-32V64z"/>
+                </svg>
+                <h3>工业拉链</h3>
+                <p>金属/尼龙/防水</p>
+                <p>高强度工业级拉链，适用于各类服装、箱包、户外装备，耐用可靠，多种规格可选。</p>
+                <div class="product-footer">
+                    <span class="price">￥0.85/条</span>
+                    <button class="btn-small">选型</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <svg class="product-icon" viewBox="0 0 512 512">
+                    <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
+                </svg>
+                <h3>结构纽扣</h3>
+                <p>树脂/金属/牛仔扣</p>
+                <p>精密结构设计，表面处理工艺精良，耐磨耐腐蚀，多种颜色和尺寸满足不同需求。</p>
+                <div class="product-footer">
+                    <span class="price">￥0.30/粒</span>
+                    <button class="btn-small">选型</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <svg class="product-icon" viewBox="0 0 640 512">
+                    <path d="M320 128c17.7 0 32-14.3 32-32s-14.3-32-32-32H192c-17.7 0-32 14.3-32 32V352c-35.3 0-64 28.7-64 64s28.7 64 64 64H352c88.4 0 160-71.6 160-160c0-60.9-34.1-113.9-84.1-141.1C417.9 76.3 375.2 48 320 48V128zM160 416c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 64c53 0 96 43 96 96s-43 96-96 96H160c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 64c17.7 0 32-14.3 32-32s-14.3-32-32-32H224 160z"/>
+                </svg>
+                <h3>高光油边</h3>
+                <p>PU/环保/耐黄变</p>
+                <p>环保配方，高光泽度，耐黄变性能优异，适用于皮革制品边缘处理，提升产品质感。</p>
+                <div class="product-footer">
+                    <span class="price">￥12.50/升</span>
+                    <button class="btn-small">选型</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <h2 class="section-title">数据看板</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-item">
+                <div class="gauge">
+                    <div class="gauge-value" id="counter1">0</div>
+                </div>
+                <div class="dashboard-label">年出货量</div>
+            </div>
+            <div class="dashboard-item">
+                <div class="gauge">
+                    <div class="gauge-value" id="counter2">0</div>
+                </div>
+                <div class="dashboard-label">合作品牌</div>
+            </div>
+            <div class="dashboard-item">
+                <div class="gauge">
+                    <div class="gauge-value" id="counter3">0</div>
+                </div>
+                <div class="dashboard-label">定制批次</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">百盛</div>
+            <div class="footer-icons">
+                <svg viewBox="0 0 512 512">
+                    <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/>
+                </svg>
+                <svg viewBox="0 0 640 512">
+                    <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/>
+                </svg>
+                <svg viewBox="0 0 448 512">
+                    <path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/>
+                </svg>
+            </div>
+            <div class="copyright">
+                &copy; 2026 百盛精密辅料 | 工业心脏，品质为先
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Counter Animation
+        function animateCounter(id, target, suffix, duration) {
+            const element = document.getElementById(id);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    if (suffix === '亿') {
+                        element.textContent = current.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = Math.floor(current) + suffix;
+                    }
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Dashboard counter observer
+        const dashboardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('counter1', 12.8, '亿', 3000);
+                    animateCounter('counter2', 360, '+', 3000);
+                    animateCounter('counter3', 2500, '+', 3000);
+                    dashboardObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const dashboard = document.querySelector('.dashboard');
+        if (dashboard) {
+            dashboardObserver.observe(dashboard);
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
